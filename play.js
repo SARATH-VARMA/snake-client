@@ -9,3 +9,6 @@ conn.on("connect", () => {
 conn.on('data', (data) => {
   console.log('Server says: ', data);
 });
+conn.on('connect', () => {
+  conn.write('Name: SNH');
+});
