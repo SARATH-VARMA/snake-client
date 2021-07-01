@@ -11,4 +11,5 @@ conn.on('data', (data) => {
 });
 conn.on('connect', () => {
   conn.write('Name: SNH');
+  //conn.write('Move: up');
 });
