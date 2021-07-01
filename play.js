@@ -1,15 +1,21 @@
 const { connect } = require('./client.js')
-
+//stdin input function
+const setupInput = function () {
+  const stdin = process.stdin;
+  stdin.setRawMode(true);
+  stdin.setEncoding("utf8");
+  stdin.resume();
+  stdin.on("data", handleUserInput);
+  return stdin;
+};
+//.....
+const handleUserInput = function (key) {
+  if (key === '\u0003') {
+    process.exit();
+  }
+};
 console.log("Connecting ...");
-let conn = connect();
+connect();
+setupInput();
 
-conn.on("connect", () => {
-  console.log("connected to server")
-});
-conn.on('data', (data) => {
-  console.log('Server says: ', data);
-});
-conn.on('connect', () => {
-  conn.write('Name: SNH');
-  //conn.write('Move: up');
-});
+
